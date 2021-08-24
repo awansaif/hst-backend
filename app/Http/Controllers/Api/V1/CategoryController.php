@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Models\Blog;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -40,9 +41,16 @@ class CategoryController extends Controller
     }
 
 
-    public function show(Category $category)
+    public function show($slug)
     {
-        //
+        $categoryId = Category::where('slug', $slug)->pluck('id')->first();
+
+        $blogs = Blog::where('category_id', $categoryId)->get();
+
+        return response()->json([
+            'status' => 200,
+            'data' => $blogs,
+        ], 200);
     }
 
     public function edit(Category $category)

@@ -15,59 +15,54 @@ class MemberController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
-        //
+        return view('admin.pages.member.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string',
+            'avatar_path' => 'required|image',
+        ]);
+
+        Member::create([
+            'name' => $request->name,
+            'avatar_path' => $request->avatar_path->store('images', 'public'),
+        ]);
+
+        return back()
+            ->with('message', 'Member added successfully');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Member  $member
-     * @return \Illuminate\Http\Response
-     */
     public function show(Member $member)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Member  $member
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Member $member)
     {
-        //
+        return view('admin.pages.member.edit', [
+            'member' => $member
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Member  $member
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Member $member)
     {
-        //
+        $request->validate([
+            'name' => 'required|string',
+            'avatar_path' => 'nullable|image',
+        ]);
+
+        $member->update([
+            'name' => $request->name,
+            'avatar_path' => $request->file('avatar_path') ?  $request->avatar_path->store('images', 'public') : $member->avatar_path,
+        ]);
+
+        return back()
+            ->with('message', 'Member Updated successfully');
     }
 
     /**

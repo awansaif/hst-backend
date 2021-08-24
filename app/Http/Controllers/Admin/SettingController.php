@@ -3,48 +3,44 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\About;
 use Illuminate\Http\Request;
 
-class AboutController extends Controller
+class SettingController extends Controller
 {
 
     public function index()
     {
-        return view('admin.pages.about.index', [
-            'about' => About::pluck('about_text')->first()
-        ]);
+        return view('admin.pages.setting.index');
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
         //
     }
 
-
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
-        $request->validate([
-            'about' => 'required'
-        ]);
-
-        About::UpdateorCreate([
-            'id' => 1
-        ], [
-            'about_text' => $request->about
-        ]);
-
-        return back()
-            ->with('message', 'About text updated successfully');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\About  $about
+     * @param  \App\Models\Admin  $admin
      * @return \Illuminate\Http\Response
      */
-    public function show(About $about)
+    public function show(Admin $admin)
     {
         //
     }
@@ -52,10 +48,10 @@ class AboutController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\About  $about
+     * @param  \App\Models\Admin  $admin
      * @return \Illuminate\Http\Response
      */
-    public function edit(About $about)
+    public function edit(Admin $admin)
     {
         //
     }
@@ -64,10 +60,10 @@ class AboutController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\About  $about
+     * @param  \App\Models\Admin  $admin
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, About $about)
+    public function update(Request $request, Admin $admin)
     {
         //
     }
@@ -75,10 +71,10 @@ class AboutController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\About  $about
+     * @param  \App\Models\Admin  $admin
      * @return \Illuminate\Http\Response
      */
-    public function destroy(About $about)
+    public function destroy(Admin $admin)
     {
         //
     }

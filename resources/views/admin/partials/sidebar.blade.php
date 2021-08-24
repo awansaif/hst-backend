@@ -27,7 +27,7 @@
                         <a href="{{ Route('admin.categories.index') }}">Categories</a>
                     </li>
                     <li>
-                        <a href="tranasactions.html">Blog</a>
+                        <a href="{{ Route('admin.blogs.index') }}">Blog</a>
                     </li>
                 </ul>
 
@@ -47,31 +47,12 @@
                     <li>
                         <a href="{{ Route('admin.members.index') }}">Member</a>
                     </li>
-                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Email</a>
-                        <ul aria-expanded="false">
-                            <li><a href="./email-compose.html">Compose</a></li>
-                            <li><a href="./email-inbox.html">Inbox</a></li>
-                            <li><a href="./email-read.html">Read</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="./app-calender.html">Calendar</a></li>
-                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Shop</a>
-                        <ul aria-expanded="false">
-                            <li><a href="./ecom-product-grid.html">Product Grid</a></li>
-                            <li><a href="./ecom-product-list.html">Product List</a></li>
-                            <li><a href="./ecom-product-detail.html">Product Details</a></li>
-                            <li><a href="./ecom-product-order.html">Order</a></li>
-                            <li><a href="./ecom-checkout.html">Checkout</a></li>
-                            <li><a href="./ecom-invoice.html">Invoice</a></li>
-                            <li><a href="./ecom-customers.html">Customers</a></li>
-                        </ul>
-                    </li>
                 </ul>
             </li>
             <li>
-                <a href="widget-basic.html" class="ai-icon" aria-expanded="false">
+                <a href="{{ Route('admin.settings.index') }}" class="ai-icon" aria-expanded="false">
                     <i class="flaticon-381-settings-2"></i>
-                    <span class="nav-text">Widget</span>
+                    <span class="nav-text">Setting</span>
                 </a>
             </li>
         </ul>
@@ -81,6 +62,3 @@
         </div>
     </div>
 </div>
-<!--**********************************
-            Sidebar end
-        ***********************************-->
