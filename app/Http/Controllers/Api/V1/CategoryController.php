@@ -28,45 +28,15 @@ class CategoryController extends Controller
         ], 200);
     }
 
-
-    public function create()
-    {
-        //
-    }
-
-
-    public function store(Request $request)
-    {
-        //
-    }
-
-
     public function show($slug)
     {
         $categoryId = Category::where('slug', $slug)->pluck('id')->first();
 
-        $blogs = Blog::where('category_id', $categoryId)->get();
+        $blogs = Blog::with('view')->where('category_id', $categoryId)->get();
 
         return response()->json([
             'status' => 200,
             'data' => $blogs,
         ], 200);
-    }
-
-    public function edit(Category $category)
-    {
-        //
-    }
-
-
-    public function update(Request $request, Category $category)
-    {
-        //
-    }
-
-
-    public function destroy(Category $category)
-    {
-        //
     }
 }

@@ -22,13 +22,22 @@ class BlogController extends Controller
 
     public function show($slug)
     {
-        $blog = Blog::with('category', 'view')->where('slug', $slug)->firstorfail();
-        $views = BlogView::where('blog_id', $blog->id)->first();
+        $blog = Blog::with('category', 'view')
+            ->where('slug', $slug)
+            ->firstorfail();
+        $views = BlogView::where('blog_id', $blog->id)
+            ->first();
+        $data = [
+            'blog' => $blog,
+            'previous' => Blog::where('id', '<', $blog->id)
+                ->select('slug', 'title')
+                ->first(),
 
-        $previous = Blog::where('id', '<', $blog->id)->max('id');
-
-        // get next Blog id
-        $next = Blog::where('id', '>', $blog->id)->min('id');
+            // get next Blog id
+            'next' => Blog::where('id', '>', $blog->id)
+                ->select('slug', 'title')
+                ->first()
+        ];
         if (!$views) {
             BlogView::create([
                 'blog_id' => $blog->id,
@@ -40,19 +49,20 @@ class BlogController extends Controller
         ]);
         return response()->json([
             'status' => 200,
-            'data'   => $blog,
-            'previous' => $previous,
-            'next' => $next
+            'data'   => $data,
         ], 200);
     }
 
     public function trending()
     {
-        $blogs = Blog::with('category', 'view')
+        $blogs = Blog::with(['category', 'view' => function ($query) {
+            $query->orderBy('views', 'DESC');
+        }])
             ->orderBy('id', 'DESC')
             ->whereDate('created_at', today())
-            ->get()
-            ->sortByDesc('view.views');
+            ->select("id", 'slug', 'title', 'featured_image', 'created_at')
+            ->take(5)
+            ->get();
         return response()->json([
             'status' => 200,
             'data'   => $blogs
@@ -60,10 +70,12 @@ class BlogController extends Controller
     }
     public function recommended()
     {
-        $blogs = Blog::with('category', 'view')
+        $blogs = Blog::with(['category', 'view' => function ($query) {
+            $query->orderBy('views', 'DESC');
+        }])
             ->orderBy('id', 'DESC')
-            ->get()
-            ->sortByDesc('view.views');
+            ->take(6)
+            ->get();
         return response()->json([
             'status' => 200,
             'data'   => $blogs

@@ -47,7 +47,7 @@ class BlogController extends Controller
             'isFeatured' => $request->featured
         ]);
         BlogView::create([
-            'blog_id' => $blog,
+            'blog_id' => $blog->id,
             'views' => 0
         ]);
         return back()

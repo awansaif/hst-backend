@@ -46,7 +46,11 @@ Route::get('about-us', function () {
 Route::get('featured', function () {
     return response()->json([
         'status'  => 200,
-        'data' => Blog::with('category')->where('isFeatured', 1)->paginate(10),
+        'data' => Blog::with('category', 'view')
+            ->where('isFeatured', 1)
+            ->orderBy('id', 'DESC')
+            ->take(4)
+            ->get(),
     ], 200);
 });
 
