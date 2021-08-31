@@ -1,37 +1,41 @@
 @extends('admin.layout.admin')
 
 @section('content')
-<div class="content-body">
-    <div class="container-fluid">
-        <div class="row page-titles mx-0">
-            <div class="col-sm-6 p-md-0">
-                <div class="welcome-text">
-                    <h4>Hi, {{ Auth::guard('admin')->user()->last_name }}!</h4>
-                    <span>Blogs</span>
-                </div>
-            </div>
-            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                        <a href="javascript:void(0)">Blog</a>
-                    </li>
-                    <li class="breadcrumb-item active">
-                        <a href="javascript:void(0)">Show</a>
-                    </li>
-                </ol>
-            </div>
-        </div>
-        <!-- row -->
+<!-- Start container-fluid -->
+<div class="container-fluid">
 
-
-        <div class="row">
-            <div class="col-12">
-
-                @livewire('blog.blog-list')
-
+    <!-- start  -->
+    <div class="row">
+        <div class="col-12">
+            <div>
+                <h4 class="header-title mb-3">Blogs</h4>
             </div>
         </div>
     </div>
+    <!-- end row -->
+
+    <div class="row">
+        <div class="col-12">
+            <div>
+                @if(Session::has('message'))
+                <div class="alert alert-success">
+                    <span>{{ Session::get('message') }}</span>
+                </div>
+                @endif
+                <div class="row mb-2">
+                    <div class="col-sm-12">
+                        <h5 class="font-14 float-left">Blogs</h5>
+                        <a href="{{ Route('admin.blogs.create') }}"
+                            class="btn btn-success text-light float-right btn-sm">Add</a>
+                    </div>
+                </div>
+                @livewire('blog.blog-list')
+            </div>
+        </div>
+    </div>
+    <!-- end row -->
+
 </div>
+<!-- end container-fluid -->
 
 @endsection

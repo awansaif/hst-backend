@@ -14,6 +14,7 @@
             </p>
             @enderror
         </div>
-        <button class="btn btn-success">Update</button>
+        <button class="btn btn-success float-left">Update</button>
+        <a href="{{ Route('admin.categories.index') }}" class="btn btn-primary text-light float-right">Back</a>
     </form>
 </div>

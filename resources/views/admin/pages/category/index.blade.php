@@ -1,43 +1,36 @@
 @extends('admin.layout.admin')
 
 @section('content')
-<div class="content-body">
-    <div class="container-fluid">
-        <div class="row page-titles mx-0">
-            <div class="col-sm-6 p-md-0">
-                <div class="welcome-text">
-                    <h4>Hi, {{ Auth::guard('admin')->user()->last_name }}!</h4>
-                    <span>Blog Categories</span>
-                </div>
-            </div>
-            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                        <a href="javascript:void(0)">Categories</a>
-                    </li>
-                    <li class="breadcrumb-item active">
-                        <a href="javascript:void(0)">Show</a>
-                    </li>
-                </ol>
-            </div>
-        </div>
-        <!-- row -->
+<!-- Start container-fluid -->
+<div class="container-fluid">
 
-
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title float-left">Categories</h4>
-                        <a href="{{ Route('admin.categories.create') }}" class="btn btn-success sm">Add</a>
-                    </div>
-                    <div class="card-body">
-                        @livewire('blog-categories')
-                    </div>
-                </div>
+    <!-- start  -->
+    <div class="row">
+        <div class="col-12">
+            <div>
+                <h4 class="header-title mb-3">Blog Categories</h4>
             </div>
         </div>
     </div>
+    <!-- end row -->
+
+    <div class="row">
+        <div class="col-12">
+            <div>
+                <div class="row mb-2">
+                    <div class="col-sm-12">
+                        <h5 class="font-14 float-left">Categories</h5>
+                        <a href="{{ Route('admin.categories.create') }}"
+                            class="btn btn-success text-light float-right btn-sm">Add</a>
+                    </div>
+                </div>
+                @livewire('blog-categories')
+            </div>
+        </div>
+    </div>
+    <!-- end row -->
+
 </div>
+<!-- end container-fluid -->
 
 @endsection

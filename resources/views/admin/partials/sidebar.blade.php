@@ -1,64 +1,121 @@
-<!--**********************************
-            Sidebar start
-        ***********************************-->
-<div class="deznav">
-    <div class="deznav-scroll">
-        <div class="main-profile">
-            <img src="{{ asset(auth()->guard('admin')->user()->avatar_path) }}" alt="">
-            <h5 class="mb-0 fs-20 text-black ">
-                <span class="font-w400">Hello,</span>
-                {{ auth()->guard('admin')->user()->last_name }}
-            </h5>
-            <p class="mb-0 fs-14 font-w400">
-                {{ auth()->guard('admin')->user()->email }}
-            </p>
+<div class="left-side-menu">
+
+
+    <div class="user-box">
+        <div class="float-left">
+            <img src="{{ asset(auth()->guard('admin')->user()->avatar_path) }}" alt="" class="avatar-md rounded-circle">
         </div>
-        <ul class="metismenu" id="menu">
+        <div class="user-info">
+            <a href="#">
+                {{ auth()->guard('admin')->user()->first_name }}
+                {{ auth()->guard('admin')->user()->last_name }}
+            </a>
+            <p class="text-muted m-0">Administrator</p>
+        </div>
+    </div>
+
+    <!--- Sidemenu -->
+    <div id="sidebar-menu">
+
+        <ul class="metismenu" id="side-menu">
+
+            <li class="menu-title">Navigation</li>
+
             <li>
-                <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                    <i class="flaticon-144-layout"></i>
-                    <span class="nav-text">Dashboard</span>
+                <a href="{{ Route('admin.dashboard') }}">
+                    <i class=" ti-home"></i>
+                    <span> Dashboard </span>
                 </a>
-                <ul aria-expanded="false">
-                    <li>
-                        <a href="{{ Route('admin.dashboard') }}">Dashboard</a>
-                    </li>
+            </li>
+
+            <li>
+                <a href="javascript: void(0);">
+                    <i class="ti-light-bulb"></i>
+                    <span> Categories </span>
+                    <span class="menu-arrow"></span>
+                </a>
+                <ul class="nav-second-level" aria-expanded="false">
                     <li>
                         <a href="{{ Route('admin.categories.index') }}">Categories</a>
                     </li>
                     <li>
-                        <a href="{{ Route('admin.blogs.index') }}">Blog</a>
+                        <a href="{{ Route('admin.categories.create') }}">Add New</a>
                     </li>
                 </ul>
+            </li>
 
-            </li>
             <li>
-                <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                    <i class="flaticon-077-menu-1"></i>
-                    <span class="nav-text">Apps</span>
+                <a href="javascript: void(0);">
+                    <i class="ti-pencil-alt"></i>
+                    <span> Blog </span>
+                    <span class="menu-arrow"></span>
                 </a>
-                <ul aria-expanded="false">
+                <ul class="nav-second-level" aria-expanded="false">
                     <li>
-                        <a href="{{ Route('admin.subscribers') }}">Subscribers</a>
+                        <a href="{{ Route('admin.blogs.index') }}">Blogs</a>
                     </li>
                     <li>
-                        <a href="{{ Route('admin.abouts.index') }}">About Page</a>
-                    </li>
-                    <li>
-                        <a href="{{ Route('admin.members.index') }}">Member</a>
+                        <a href="{{ Route('admin.blogs.create') }}">Add New</a>
                     </li>
                 </ul>
             </li>
+
             <li>
-                <a href="{{ Route('admin.settings.index') }}" class="ai-icon" aria-expanded="false">
-                    <i class="flaticon-381-settings-2"></i>
-                    <span class="nav-text">Setting</span>
+                <a href="{{ Route('admin.subscribers') }}">
+                    <i class="ti-menu-alt"></i>
+                    <span> Subscribers </span>
                 </a>
+            </li>
+
+
+            <li>
+                <a href="javascript: void(0);">
+                    <i class="ti-files"></i>
+                    <span> Pages </span>
+                    <span class="menu-arrow"></span>
+                </a>
+                <ul class="nav-second-level" aria-expanded="false">
+                    <li>
+                        <a href="{{ Route('admin.abouts.index') }}">About Us</a>
+                    </li>
+                    <li>
+                        <a href="{{ Route('admin.members.index') }}">Team Member</a>
+                    </li>
+
+                    <li>
+                        <a href="{{ Route('admin.contactus.index') }}">Contact Us</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="{{ Route('admin.siteprofiles.index') }}">
+                    <i class="mdi mdi-face-profile"></i>
+                    <span>Site Profile</span>
+                </a>
+            </li>
+
+
+            <li class="menu-title">Editors</li>
+
+            <li>
+                <a href="javascript: void(0);">
+                    <i class="ti-files"></i>
+                    <span>Editor</span>
+                    <span class="menu-arrow"></span>
+                </a>
+                <ul class="nav-second-level" aria-expanded="false">
+                    <li>
+                        <a href="{{ Route('admin.editors.index') }}">Editors</a>
+                    </li>
+                    <li>
+                        <a href="{{ Route('admin.editors.create') }}">Add New</a>
+                    </li>
+                </ul>
             </li>
         </ul>
-        <div class="copyright">
-            <p><strong>Zenix Crypto Admin Dashboard</strong> © 2021 All Rights Reserved</p>
-            <p class="fs-12">Made with <span class="heart"></span> by DexignZone</p>
-        </div>
     </div>
+    <!-- End Sidebar -->
+
+    <div class="clearfix"></div>
 </div>

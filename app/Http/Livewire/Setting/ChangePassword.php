@@ -34,6 +34,7 @@ class ChangePassword extends Component
 
             session()->flash('message', 'Password Updated successfully');
         }
+        $this->reset();
     }
     public function render()
     {

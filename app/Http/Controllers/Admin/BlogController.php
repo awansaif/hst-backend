@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\BlogView;
 use App\Models\Category;
+use App\Models\Editor;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -23,7 +24,8 @@ class BlogController extends Controller
     public function create(): View
     {
         return view('admin.pages.blog.create', [
-            'categories' => Category::orderBy('title', 'ASC')->get()
+            'categories' => Category::orderBy('title', 'ASC')->get(),
+            'editors'    => Editor::orderBy('name', 'ASC')->get()
         ]);
     }
 
@@ -34,11 +36,13 @@ class BlogController extends Controller
             'title' => 'required|unique:blogs,title',
             'featured_image' => 'required|image',
             'category' => 'required|exists:categories,id',
+            'editor' => 'required|exists:editors,id',
             'featured' => 'required|boolean',
             'body'    => 'required'
         ]);
 
         $blog = Blog::create([
+            'editor_id' => $request->editor,
             'title' => $request->title,
             'slug' => Str::slug($request->title, '-'),
             'featured_image' => $request->featured_image->store('images', 'public'),
@@ -70,7 +74,8 @@ class BlogController extends Controller
     {
         return view('admin.pages.blog.edit', [
             'blog' => $blog,
-            'categories' => Category::orderBy('title', 'ASC')->get()
+            'categories' => Category::orderBy('title', 'ASC')->get(),
+            'editors'    => Editor::orderBy('name', 'ASC')->get()
         ]);
     }
 
@@ -81,11 +86,13 @@ class BlogController extends Controller
             'title' => 'required|unique:blogs,title,' . $blog->id,
             'featured_image' => 'nullable|image',
             'category' => 'required|exists:categories,id',
+            'editor' => 'required|exists:editors,id',
             'featured' => 'required|boolean',
             'body'    => 'required'
         ]);
 
         $blog->update([
+            'editor_id' => $request->editor,
             'title' => $request->title,
             'slug' => Str::slug($request->title, '-'),
             'featured_image' => $request->featured_image ? $request->featured_image->store('images', 'public') : $blog->featured_image,

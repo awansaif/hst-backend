@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8" />
+        <title>Bootstrap Alerts | Simple - Responsive Bootstrap 4 Admin Dashboard</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Responsive bootstrap 4 admin template" name="description" />
+        <meta content="Coderthemes" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="assets/images/favicon.ico">
+        <!-- Plugin css -->
+        <link href="assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+        <!-- App css -->
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet" />
+        <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-stylesheet" />
+
+    </head>
+
+    <body data-layout="horizontal">
+
+        <!-- Begin page -->
+        <div id="wrapper">
+
+            @@include('./partials/horizontal-nav.html')
+
+            <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
+
+            <div class="content-page">
+                <div class="content">
+
+                    <!-- Start container-fluid -->
+                    <div class="container-fluid">
+
+                        <!-- start  -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div>
+                                    <h4 class="header-title mb-3">Bootstrap Alerts</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end row -->
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div>
+                                    <h5 class="font-14 mt-0 mb-3">Default Alert</h5>
+                                    <div class="alert alert-success text-success alert-dismissible fade show" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <strong>Well done!</strong> You successfully read this important alert message.
+                                    </div>
+                                    <div class="alert alert-info text-info alert-dismissible fade show" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
+                                    </div>
+                                    <div class="alert alert-warning text-warning alert-dismissible fade show" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+                                    </div>
+                                    <div class="alert alert-danger text-danger alert-dismissible fade show" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <strong>Oh snap!</strong> Change a few things up and try submitting again.
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end col -->
+
+                            <div class="col-lg-6">
+                                <div class="mt-4 mt-lg-0">
+                                    <h5 class="font-14 mt-0 mb-3">Icon Examples</h5>
+
+                                    <div class="alert alert-icon alert-success text-success alert-dismissible fade show" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <i class="mdi mdi-check-all mr-2"></i>
+                                        <strong>Well done!</strong> You successfully read this important alert message.
+                                    </div>
+                                    <div class="alert alert-icon alert-info text-info alert-dismissible fade show" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <i class="mdi mdi-information mr-2"></i>
+                                        <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
+                                    </div>
+                                    <div class="alert alert-icon alert-warning text-warning alert-dismissible fade show" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <i class="mdi mdi-alert mr-2"></i>
+                                        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+                                    </div>
+                                    <div class="alert alert-icon alert-danger text-danger alert-dismissible fade show" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <i class="mdi mdi-block-helper mr-2"></i>
+                                        <strong>Oh snap!</strong> Change a few things up and try submitting again.
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end col -->
+
+                        </div>
+                        <!-- end row -->
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="mt-4 mt-lg-0">
+                                    <h5 class="font-14 mb-3">Default Alert (White)</h5>
+
+                                    <div class="alert alert-success bg-white text-success alert-dismissible fade show" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <strong>Well done!</strong> You successfully read this important alert message.
+                                    </div>
+                                    <div class="alert alert-info bg-white text-info alert-dismissible fade show" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
+                                    </div>
+                                    <div class="alert alert-warning text-warning bg-white alert-dismissible fade show" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+                                    </div>
+                                    <div class="alert alert-danger bg-white text-danger alert-dismissible fade show" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <strong>Oh snap!</strong> Change a few things up and try submitting again.
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end col -->
+
+                            <div class="col-lg-6">
+                                <div class="mt-4 mt-lg-0">
+                                    <h5 class="font-14 mb-3">Icon Examples (White)</h5>
+
+                                    <div class="alert alert-icon bg-white text-success alert-success alert-dismissible fade show" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <i class="mdi mdi-check-all mr-2"></i>
+                                        <strong>Well done!</strong> You successfully read this important alert message.
+                                    </div>
+                                    <div class="alert alert-icon bg-white text-info alert-info alert-dismissible fade show" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <i class="mdi mdi-information mr-2"></i>
+                                        <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
+                                    </div>
+                                    <div class="alert alert-icon bg-white text-warning alert-warning alert-dismissible fade show" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <i class="mdi mdi-alert mr-2"></i>
+                                        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+                                    </div>
+                                    <div class="alert alert-icon bg-white text-danger alert-danger alert-dismissible fade show" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <i class="mdi mdi-block-helper mr-2"></i>
+                                        <strong>Oh snap!</strong> Change a few things up and try submitting again.
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end col -->
+
+                        </div>
+                        <!-- end row -->
+
+
+                        <!-- start  -->
+                        <div class="row mt-5">
+                            <div class="col-12">
+                                <div>
+                                    <h4 class="header-title">Sweet Alert 2</h4>
+                                    <p class="sub-header">
+                                        A beautiful and customizable replacement for JavaScript's popup boxes
+                                    </p>
+
+                                    <div class="table-responsive">
+                                        <table class="table table-centered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Alert Type</th>
+                                                    <th>Example</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>A basic message</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-primary waves-effect waves-light btn-sm" id="sa-basic">Click me</button>
+                                                    </td>
+                                                </tr>
+            
+                                                <tr>
+                                                    <td>A title with a text under</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-primary waves-effect waves-light btn-sm" id="sa-title">Click me</button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>A success message!</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-primary waves-effect waves-light btn-sm" id="sa-success">Click me</button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>A warning message, with a function attached to the "Confirm"-button...</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-primary waves-effect waves-light btn-sm" id="sa-warning">Click me</button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>By passing a parameter, you can execute something else for "Cancel".</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-primary waves-effect waves-light btn-sm" id="sa-params">Click me</button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>A message with custom Image Header</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-primary waves-effect waves-light btn-sm" id="sa-image">Click me</button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>A message with auto close timer</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-primary waves-effect waves-light btn-sm" id="sa-close">Click me</button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Custom HTML description and buttons</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-primary waves-effect waves-light btn-sm" id="custom-html-alert">Click me</button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>A message with custom width, padding and background</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-primary waves-effect waves-light btn-sm" id="custom-padding-width-alert">Click me</button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Ajax request example</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-primary waves-effect waves-light btn-sm" id="ajax-alert">Click me</button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Chaining modals (queue) example</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-primary waves-effect waves-light btn-sm" id="chaining-alert">Click me</button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Dynamic queue example</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-primary waves-effect waves-light btn-sm" id="dynamic-alert">Click me</button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+            
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end row -->
+
+                    </div>
+                    <!-- end container-fluid -->
+
+                    @@include('./partials/footer.html')
+
+                </div>
+                <!-- end content -->
+
+            </div>
+            <!-- END content-page -->
+
+        </div>
+        <!-- END wrapper -->
+        
+        @@include('./partials/right-sidebar.html')
+
+        <!-- Vendor js -->
+        <script src="assets/js/vendor.min.js"></script>
+
+        <script src="assets/libs/sweetalert2/sweetalert2.min.js"></script>
+
+        <script src="assets/js/pages/sweet-alerts.init.js"></script>
+
+        <!-- App js -->
+        <script src="assets/js/app.min.js"></script>
+
+    </body>
+
+</html>

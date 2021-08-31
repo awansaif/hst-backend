@@ -11,6 +11,7 @@ class Blog extends Model
     use HasFactory;
 
     protected $fillable = [
+        'editor_id',
         'title',
         'slug',
         'featured_image',
@@ -29,6 +30,14 @@ class Blog extends Model
     public function view()
     {
         return $this->belongsTo(BlogView::class, 'id', 'blog_id');
+    }
+    public function profile()
+    {
+        return $this->hasOne(EditorProfile::class, 'editor_id', 'editor_id');
+    }
+    public function editor()
+    {
+        return $this->belongsTo(Editor::class);
     }
 
     protected $casts = [

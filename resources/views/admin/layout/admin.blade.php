@@ -2,104 +2,84 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>{{ env('APP_NAME') }} | Dashboard </title>
-    <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicon.png') }}">
-    <link rel="stylesheet" href="{{ asset('vendor/chartist/css/chartist.min.css') }}">
-    <link href="{{ asset('vendor/bootstrap-select/dist/css/bootstrap-select.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('vendor/owl-carousel/owl.carousel.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
-    <!-- Custom Stylesheet -->
-    @livewireStyles
+    <meta charset="utf-8" />
+    <title>Dashboard | Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Responsive bootstrap 4 admin template" name="description" />
+    <meta content="Coderthemes" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
 
+    <link href="{{ asset("assets/libs/datatables/dataTables.bootstrap4.css") }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset("assets/libs/datatables/responsive.bootstrap4.css") }}" rel="stylesheet" type="text/css" />
+
+    <!-- App css -->
+    <link href="{{ asset("assets/css/bootstrap.min.css") }}" rel="stylesheet" type="text/css"
+        id="bootstrap-stylesheet" />
+    <link href="{{ asset("assets/css/icons.min.css") }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset("assets/css/app.min.css") }}" rel="stylesheet" type="text/css" id="app-stylesheet" />
+
+    @livewireStyles()
 </head>
 
 <body>
 
-    <!--*******************
-        Preloader start
-    ********************-->
-    <div id="preloader">
-        <div class="sk-three-bounce">
-            <div class="sk-child sk-bounce1"></div>
-            <div class="sk-child sk-bounce2"></div>
-            <div class="sk-child sk-bounce3"></div>
-        </div>
-    </div>
-    <!--*******************
-        Preloader end
-    ********************-->
-
-    <!--**********************************
-            Main wrapper start
-        ***********************************-->
-    <div id="main-wrapper">
-
+    <!-- Begin page -->
+    <div id="wrapper">
         @include('admin.partials.navbar')
-
-        {{-- sidebar --}}
         @include('admin.partials.sidebar')
+        <div class="content-page">
+            <div class="content">
+                @yield('content')
+                <!-- Footer Start -->
+                <footer class="footer">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                2017 - 2020 &copy; Simple theme by <a href="">Coderthemes</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+                <!-- end Footer -->
 
-        {{-- content --}}
-        @yield('content')
-
-
-        <!--**********************************
-                    Footer start
-                ***********************************-->
-        <div class="footer">
-            <div class="copyright">
-                <p>Copyright © Designed &amp; Developed by <a href="http://dexignzone.com/"
-                        target="_blank">DexignZone</a>
-                    2021</p>
             </div>
+            <!-- end content -->
         </div>
-        <!--**********************************
-                    Footer end
-                ***********************************-->
-
-
-
     </div>
-    <!--**********************************
-                Main wrapper end
-            ***********************************-->
+    <!-- Vendor js -->
+    <script src="{{ asset("assets/js/vendor.min.js") }}"></script>
 
-    <!--**********************************
-                Scripts
-            ***********************************-->
-    <!-- Required vendors -->
+    <script src="{{ asset("assets/libs/morris-js/morris.min.js") }}"></script>
+    <script src="{{ asset("assets/libs/raphael/raphael.min.js") }}"></script>
+
+    <script src="{{ asset("assets/js/pages/dashboard.init.js") }}"></script>
+
+    <!-- Required datatable js -->
+    <script src="{{ asset("assets/libs/datatables/jquery.dataTables.min.js") }}"></script>
+    <script src="{{ asset("assets/libs/datatables/dataTables.bootstrap4.min.js") }}"></script>
+
+    <!-- Responsive examples -->
+    <script src="{{ asset("assets/libs/datatables/dataTables.responsive.min.js") }}"></script>
+    <script src="{{ asset("assets/libs/datatables/responsive.bootstrap4.min.js") }}"></script>
+
+    <!-- Datatables init -->
+    <script src="{{ asset("assets/js/pages/datatables.init.js") }}"></script>
+    <!-- App js -->
+    <script src="{{ asset("assets/js/app.min.js") }}"></script>
+    {{-- ckeditor --}}
     <script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script>
-    <script src="{{ asset('vendor/global/global.min.js') }}"></script>
-    <script src="{{ asset('vendor/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
-    <script src="{{ asset('vendor/chart.js/Chart.bundle.min.js') }}"></script>
 
-    <!-- Chart piety plugin files -->
-    <script src="{{ asset('vendor/peity/jquery.peity.min.js') }}"></script>
-
-    <!-- Dashboard 1 -->
-    <script src="{{ asset('js/dashboard/dashboard-1.js') }}"></script>
-
-    <script src="{{ asset('vendor/owl-carousel/owl.carousel.js') }}"></script>
-    <script src="{{ asset('js/custom.min.js') }}"></script>
-    <script src="{{ asset('js/deznav-init.js') }}"></script>
-    <!-- Datatable -->
-    <script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('js/plugins-init/datatables.init.js') }}"></script>
     <script>
         ClassicEditor
-            .create( document.querySelector( '#editor' ) )
+            .create( document.querySelector( '#editor' ))
+
             .catch( error => {
                 console.error( error );
             } );
     </script>
-    @livewireScripts
-
-
+    @livewireScripts()
 </body>
 
 </html>

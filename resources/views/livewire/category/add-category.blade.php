@@ -15,5 +15,6 @@
             @enderror
         </div>
         <button class="btn btn-success">Add</button>
+        <a href="{{ Route('admin.categories.index') }}" class="btn btn-primary text-light float-right">Back</a>
     </form>
 </div>
