@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
+use App\Models\Blog;
+use App\Models\Editor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -40,7 +42,13 @@ class AdminController extends Controller
     // dashboard
     public function dashboard()
     {
-        return view('admin.dashboard');
+        $blogs = Blog::withCount('comments')->get();
+        return view('admin.dashboard', [
+            'blogs' => $blogs->count(),
+            'views' => $blogs->sum('views'),
+            'comments' => $blogs->sum('comments_count'),
+            'editors' => Editor::get(),
+        ]);
     }
 
 

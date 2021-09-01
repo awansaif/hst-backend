@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\V1\BlogController;
 use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\ContactUsController;
+use App\Http\Controllers\Api\V1\EditorController;
 use App\Http\Controllers\Api\V1\SiteController;
 use App\Models\Subscriber;
 use App\Models\About;
@@ -52,16 +53,7 @@ Route::get('about-us', function () {
     ], 200);
 });
 
-Route::get('featured', function () {
-    return response()->json([
-        'status'  => 200,
-        'data' => Blog::with('category', 'view')
-            ->where('isFeatured', 1)
-            ->orderBy('id', 'DESC')
-            ->take(4)
-            ->get(),
-    ], 200);
-});
+Route::get('featured', [BlogController::class, 'featured']);
 
 Route::get('team', function () {
     return response()->json([
@@ -69,3 +61,10 @@ Route::get('team', function () {
         'data' => Member::get(),
     ], 200);
 });
+
+
+
+// editors list
+Route::get('editors', [EditorController::class, 'editors']);
+// show signle editor blogs
+Route::get('editor/{slug}', [EditorController::class, 'blogs']);

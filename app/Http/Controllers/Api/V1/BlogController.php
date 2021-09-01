@@ -5,26 +5,32 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\BlogComment;
-use App\Models\BlogView;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
 
+    // home page blogs
     public function index()
     {
-        $blogs = Blog::with('category', 'view')
+        $blogs = Blog::with('category')
+            ->withCount('comments')
             ->orderBy('id', 'DESC')
             ->take(10)
             ->get();
+
         return response()->json([
             'status' => 200,
             'data'   => $blogs
         ], 200);
     }
+
+
+    // fetch all blogs
     public function all()
     {
-        $blogs = Blog::with('category', 'view')
+        $blogs = Blog::with('category')
+            ->withCount('comments')
             ->orderBy('id', 'DESC')
             ->get();
         return response()->json([
@@ -33,9 +39,11 @@ class BlogController extends Controller
         ], 200);
     }
 
+    // show signle blog
     public function show($slug)
     {
-        $blog = Blog::with('category', 'view', 'editor', 'profile')
+        $blog = Blog::with('category', 'editor', 'profile')
+            ->withCount('comments')
             ->where('slug', $slug)
             ->first();
         if (!$blog) {
@@ -44,34 +52,29 @@ class BlogController extends Controller
                 'message'   => "Blog Not Found",
             ], 404);
         }
-        $views = BlogView::where('blog_id', $blog->id)
-            ->first();
+
+        $blog->update([
+            'views' => $blog->views + 1
+        ]);
+
         $data = [
             'blog' => $blog,
             'previous' => Blog::where('id', '<', $blog->id)
                 ->select('slug', 'title')
                 ->first(),
 
-            // get next Blog id
             'next' => Blog::where('id', '>', $blog->id)
                 ->select('slug', 'title')
                 ->first()
         ];
-        if (!$views) {
-            BlogView::create([
-                'blog_id' => $blog->id,
-                'views' => 0
-            ]);
-        }
-        $views->update([
-            'views' => $views->views + 1
-        ]);
+
         return response()->json([
             'status' => 200,
             'data'   => $data,
         ], 200);
     }
 
+    // show comments of blog
     public function comment($slug)
     {
         $blog = Blog::where('slug', $slug)
@@ -86,6 +89,7 @@ class BlogController extends Controller
     }
 
 
+    // save comment
     public function save_comment($slug, Request $request)
     {
         $request->validate([
@@ -94,43 +98,61 @@ class BlogController extends Controller
             'message' => 'required'
         ]);
 
-        $blog = Blog::with('category', 'view')
+        $blog = Blog::with('category')
             ->where('slug', $slug)
             ->first();
+
         $comment = BlogComment::create([
             'blog_id' => $blog->id,
             'name'   => $request->name,
             'email' => $request->email,
             'text' => $request->message
         ]);
+
         return response()->json([
             'status' => 200,
             'message' => 'Comment added successfully',
             'comment' => $comment
         ]);
     }
+
+    // show trending blogs
     public function trending()
     {
-        $blogs = Blog::with(['category', 'view' => function ($query) {
-            $query->orderBy('views', 'DESC');
-        }])
-            ->orderBy('id', 'DESC')
+        $blogs = Blog::orderBy('id', 'DESC')
             ->whereDate('created_at', today())
             ->select("id", 'slug', 'title', 'featured_image', 'created_at')
             ->take(5)
             ->get();
+
         return response()->json([
             'status' => 200,
             'data'   => $blogs
         ], 200);
     }
+
+    // fetch recommended blogs based on views
     public function recommended()
     {
-        $order = "DESC";
-        $blogs = Blog::with(['category',  'view' => function ($q) {
-            $q->orderBy('views', 'ASC');
-        }])
+        $blogs = Blog::with('category')
+            ->withCount('comments')
+            ->orderBy('views', 'DESC')
             ->take(6)
+            ->get();
+
+        return response()->json([
+            'status' => 200,
+            'data'   => $blogs
+        ], 200);
+    }
+
+    // show latest blogs
+    public function latest()
+    {
+        $blogs = Blog::with('category')
+            ->withCount('comments')
+            ->orderBy('id', 'DESC')
+            ->take(3)
             ->get();
         return response()->json([
             'status' => 200,
@@ -138,15 +160,18 @@ class BlogController extends Controller
         ], 200);
     }
 
-    public function latest()
+
+    // featured blogs
+    public function featured()
     {
-        $blogs = Blog::with('category', 'view')
-            ->orderBy('id', 'DESC')
-            ->take(3)
-            ->get();
         return response()->json([
-            'status' => 200,
-            'data'   => $blogs
+            'status'  => 200,
+            'data' => Blog::with('category')
+                ->withCount('comments')
+                ->where('isFeatured', 1)
+                ->orderBy('id', 'DESC')
+                ->take(4)
+                ->get(),
         ], 200);
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Editor;
 
 use App\Http\Controllers\Controller;
+use App\Models\Blog;
+use App\Models\BlogComment;
 use App\Models\Editor;
 use App\Models\EditorProfile;
 use Illuminate\Http\Request;
@@ -35,8 +37,15 @@ class EditorController extends Controller
 
     public function dashboard()
     {
+        $blogs = Blog::withCount('comments')
+            ->where('editor_id', auth()->guard('editor')->user()->id)
+            ->get();
         if (auth()->guard('editor')->user()->profile) {
-            return view('editor.dashboard');
+            return view('editor.dashboard', [
+                'blogs' => $blogs,
+                'comments' => $blogs->sum('comments_count'),
+                'views' => $blogs->sum('views'),
+            ]);
         } else {
             return redirect()
                 ->route('editor.profile');

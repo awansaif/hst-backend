@@ -16,6 +16,7 @@ class CategoryController extends Controller
             ->select('title', 'slug')
             ->orderBy('title', 'ASC')
             ->get();
+
         if (!count($categories) > 0) {
             return response()->json([
                 'status'  => 403,
@@ -28,11 +29,16 @@ class CategoryController extends Controller
         ], 200);
     }
 
+    // show specific category blogs
     public function show($slug)
     {
-        $categoryId = Category::where('slug', $slug)->pluck('id')->first();
+        $categoryId = Category::where('slug', $slug)
+            ->pluck('id')
+            ->first();
 
-        $blogs = Blog::with('view')->where('category_id', $categoryId)->get();
+        $blogs = Blog::where('category_id', $categoryId)
+            ->withCount('comments')
+            ->get();
 
         return response()->json([
             'status' => 200,

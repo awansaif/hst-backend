@@ -17,7 +17,7 @@
             <td>{{ $key + 1 }}</td>
             <td>{{ $blog->category->title }}</td>
             <td style="mx-width: 200px; text-overflow:hidden;">{{ $blog->title }}</td>
-            <td>{{ $blog->view->views }}</td>
+            <td>{{ $blog->views }}</td>
             <td>{{ date('d M y h:i:s a', strtotime($blog->created_at)) }}</td>
             <td>
                 <a href="{{ Route('editor.blogs.edit', $blog->id)  }}" class="btn mb-2 btn-primary">Edit</a>

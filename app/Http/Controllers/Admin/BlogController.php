@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
-use App\Models\BlogView;
 use App\Models\Category;
 use App\Models\Editor;
 use Illuminate\Contracts\View\View;
@@ -49,10 +48,6 @@ class BlogController extends Controller
             'category_id' => $request->category,
             'body' => $request->body,
             'isFeatured' => $request->featured
-        ]);
-        BlogView::create([
-            'blog_id' => $blog->id,
-            'views' => 0
         ]);
         return back()
             ->with('message', 'Blog added successfully');

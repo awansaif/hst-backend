@@ -11,7 +11,7 @@ class BlogList extends Component
 
     public function mount()
     {
-        $this->blogs = Blog::with('category', 'editor', 'view')
+        $this->blogs = Blog::with('category')
             ->orderBy('id', 'DESC')
             ->where('editor_id', auth()->guard('editor')->user()->id)
             ->get();
@@ -25,7 +25,10 @@ class BlogList extends Component
 
         unlink('storage/' . $blog->featured_image);
 
-        $this->blogs = Blog::with('category', 'editor', 'view')->orderBy('id', 'DESC')->get();
+        $this->blogs = Blog::with('category')
+            ->orderBy('id', 'DESC')
+            ->where('editor_id', auth()->guard('editor')->user()->id)
+            ->get();
 
         session()->flash('message', 'Blog removed successfully');
     }

@@ -15,7 +15,7 @@ class ContactUs extends Component
     }
     public function remove($id)
     {
-        ContactUs::find($id)->delete();
+        ModelsContactUs::find($id)->delete();
         $this->messages = ModelsContactUs::orderBy('id', 'DESC')->get();
     }
     public function render()

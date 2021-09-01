@@ -18,6 +18,7 @@ class Blog extends Model
         'category_id',
         'featured',
         'body',
+        'views',
         'isFeatured'
     ];
 
@@ -26,19 +27,20 @@ class Blog extends Model
     {
         return $this->belongsTo(Category::class);
     }
-
-    public function view()
-    {
-        return $this->belongsTo(BlogView::class, 'id', 'blog_id');
-    }
     public function profile()
     {
-        return $this->hasOne(EditorProfile::class, 'editor_id', 'editor_id');
+        return $this->hasOne(EditorProfile::class, 'id', 'editor_id');
     }
     public function editor()
     {
-        return $this->belongsTo(Editor::class);
+        return $this->belongsTo(Editor::class, 'editor_id', 'id');
     }
+
+    public function comments()
+    {
+        return $this->hasMany(BlogComment::class);
+    }
+
 
     protected $casts = [
         'created_at' => "datetime:M d, Y",

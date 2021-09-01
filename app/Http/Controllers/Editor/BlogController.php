@@ -44,10 +44,6 @@ class BlogController extends Controller
             'body' => $request->body,
             'isFeatured' => 0
         ]);
-        BlogView::create([
-            'blog_id' => $blog->id,
-            'views' => 0
-        ]);
         return back()
             ->with('message', 'Blog added successfully');
     }
@@ -88,12 +84,6 @@ class BlogController extends Controller
             ->with('message', 'Blog updated successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Blog  $blog
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Blog $blog)
     {
         //
