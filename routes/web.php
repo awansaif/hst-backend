@@ -84,3 +84,10 @@ Route::prefix('admin')
             Route::get('logout', [AdminController::class, 'logout'])->name('logout');
         });
     });
+
+
+
+Route::get('/linkstorag', function () {
+    $clearcache = Artisan::call('storage:link');
+    echo "Link created<br>";
+});

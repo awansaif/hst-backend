@@ -51,7 +51,7 @@
                         <div class="col-xl-3 col-sm-6">
                             <div class="text-center p-3">
                                 <h4 class="mt-2"><i class="text-danger mdi mdi-cellphone-link mr-2"></i>
-                                    <b>{{ date('d M Y', strtotime($blogs->last()->created_at)) }}</b></h4>
+                                    <b>{{ $blogs && date('d M Y', strtotime($blogs->last()->created_at)) }}</b></h4>
                                 <p class="text-muted mb-0">Last Blog</p>
 
                             </div>
