@@ -27,7 +27,6 @@
             <td>
                 <form wire:submit.prevent="remove({{ $blog->id }})" method="post">
                     @csrf
-                    @method('DELETE')
                     <button class="btn btn-danger mb-2">Remove</button>
                 </form>
             </td>
