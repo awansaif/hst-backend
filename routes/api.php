@@ -5,11 +5,9 @@ use App\Http\Controllers\Api\V1\BlogController;
 use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\ContactUsController;
 use App\Http\Controllers\Api\V1\EditorController;
+use App\Http\Controllers\Api\V1\NewsListerController;
 use App\Http\Controllers\Api\V1\SiteController;
 use App\Http\Controllers\Api\V1\TeamController;
-use App\Models\Subscriber;
-use App\Models\Member;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
@@ -28,19 +26,7 @@ Route::post('contact-us', ContactUsController::class);
 
 Route::get('site-profile', SiteController::class, 'profile');
 
-Route::post('subscribe', function (Request $request) {
-    $request->validate([
-        'email' => 'required|unique:subscribers,email|email',
-    ]);
-    Subscriber::create([
-        'email' => $request->email,
-    ]);
-
-    return response()->json([
-        'status'  => 200,
-        'message' => 'Thanks for subscribe on our site',
-    ], 200);
-});
+Route::post('subscribe', NewsListerController::class);
 
 Route::get('about-us', AboutUsController::class);
 
