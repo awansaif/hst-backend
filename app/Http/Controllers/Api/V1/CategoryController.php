@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\Category;
-use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
@@ -36,7 +35,9 @@ class CategoryController extends Controller
             ->pluck('id')
             ->first();
 
-        $blogs = Blog::where('category_id', $categoryId)
+        $blogs = Blog::query()
+            ->where('category_id', $categoryId)
+            ->select('id', 'title', 'slug', 'featured_image', 'categpry_id', 'views', 'created_at')
             ->withCount('comments')
             ->get();
 
