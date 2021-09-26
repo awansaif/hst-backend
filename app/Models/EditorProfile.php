@@ -15,4 +15,10 @@ class EditorProfile extends Model
         'about_me',
         'website_link'
     ];
+
+
+    public function editor()
+    {
+        return $this->belongsTo(Editor::class);
+    }
 }

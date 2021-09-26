@@ -2,9 +2,12 @@
 
 namespace App\Models;
 
+use App\Http\Livewire\SiteProfile\EditProfile;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Blog extends Model
 {
@@ -29,11 +32,11 @@ class Blog extends Model
     }
     public function profile()
     {
-        return $this->hasOne(EditorProfile::class, 'id', 'editor_id');
+        return $this->belongsTo(EditorProfile::class, 'editor_id', 'id');
     }
     public function editor()
     {
-        return $this->belongsTo(Editor::class, 'editor_id', 'id');
+        return $this->hasOne(Editor::class, 'id', 'editor_id');
     }
 
     public function comments()

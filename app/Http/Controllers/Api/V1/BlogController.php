@@ -96,7 +96,9 @@ class BlogController extends Controller
     // show signle blog
     public function show($slug)
     {
-        $blog = Blog::with('category', 'editor', 'profile')
+        $blog = Blog::query()
+            ->with(['category' => fn ($builder) => $builder->select('id', 'title', 'slug')])
+            ->with(['editor' => fn ($builder) => $builder->select('id', 'name')])
             ->withCount('comments')
             ->where('slug', $slug)
             ->first();
@@ -131,9 +133,12 @@ class BlogController extends Controller
     // show comments of blog
     public function comment($slug)
     {
-        $blog = Blog::where('slug', $slug)
+        $blog = Blog::query()
+            ->where('slug', $slug)
+            ->select('id', 'slug')
             ->first();
-        $comments = BlogComment::orderBy('id', 'DESC')
+        $comments = BlogComment::query()
+            ->orderBy('id', 'DESC')
             ->where('blog_id', $blog->id)
             ->get();
         return response()->json([
@@ -152,7 +157,8 @@ class BlogController extends Controller
             'message' => 'required'
         ]);
 
-        $blog = Blog::with('category')
+        $blog = Blog::query()
+            ->select('id', 'slug')
             ->where('slug', $slug)
             ->first();
 
