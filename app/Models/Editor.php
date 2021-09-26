@@ -16,10 +16,4 @@ class Editor extends Authenticatable
         'email',
         'password',
     ];
-
-
-    public function profile(): BelongsTo
-    {
-        return $this->belongsTo(EditorProfile::class, 'id', 'editor_id');
-    }
 }
