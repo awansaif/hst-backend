@@ -10,13 +10,66 @@ use Illuminate\Http\Request;
 class BlogController extends Controller
 {
 
+
+
+    // show latest blogs
+    public function latest()
+    {
+        $blogs = Blog::with(['category' => fn ($builder) => $builder->select('id', 'title', 'slug')])
+            ->select('id', 'title', 'slug', 'featured_image', 'views', 'category_id', 'created_at')
+            ->withCount('comments')
+            ->orderBy('id', 'DESC')
+            ->take(3)
+            ->get();
+        return response()->json([
+            'status' => 200,
+            'data'   => $blogs
+        ], 200);
+    }
+
+    // featured blogs
+    public function featured()
+    {
+        return response()->json([
+            'status'  => 200,
+            'data' => Blog::query()
+                ->select('id', 'title', 'slug', 'featured_image', 'views', 'created_at')
+                ->withCount('comments')
+                ->where('isFeatured', 1)
+                ->orderBy('id', 'DESC')
+                ->take(4)
+                ->get(),
+        ], 200);
+    }
+
+
     // home page blogs
     public function index()
     {
-        $blogs = Blog::with('category')
+        $blogs = Blog::with(['category' => fn ($builder) => $builder->select('id', 'title', 'slug')])
             ->withCount('comments')
             ->orderBy('id', 'DESC')
+            ->select('id', 'title', 'slug', 'featured_image', 'views', 'created_at', 'category_id')
             ->take(10)
+            ->get();
+
+        return response()->json([
+            'status' => 200,
+            'data'   => $blogs
+        ], 200);
+    }
+
+
+
+    // fetch recommended blogs based on views
+    public function recommended()
+    {
+        $blogs = Blog::query()
+            ->with(['category' => fn ($builder) => $builder->select('id', 'title', 'slug')])
+            ->withCount('comments')
+            ->select('id', 'title', 'slug', 'featured_image', 'views', 'created_at', 'category_id')
+            ->orderBy('views', 'DESC')
+            ->take(6)
             ->get();
 
         return response()->json([
@@ -119,7 +172,7 @@ class BlogController extends Controller
     // show trending blogs
     public function trending()
     {
-        $blogs = Blog::orderBy('id', 'DESC')
+        $blogs = Blog::orderBy('views', 'DESC')
             ->whereDate('created_at', today())
             ->select("id", 'slug', 'title', 'featured_image', 'created_at')
             ->take(5)
@@ -128,50 +181,6 @@ class BlogController extends Controller
         return response()->json([
             'status' => 200,
             'data'   => $blogs
-        ], 200);
-    }
-
-    // fetch recommended blogs based on views
-    public function recommended()
-    {
-        $blogs = Blog::with('category')
-            ->withCount('comments')
-            ->orderBy('views', 'DESC')
-            ->take(6)
-            ->get();
-
-        return response()->json([
-            'status' => 200,
-            'data'   => $blogs
-        ], 200);
-    }
-
-    // show latest blogs
-    public function latest()
-    {
-        $blogs = Blog::with('category')
-            ->withCount('comments')
-            ->orderBy('id', 'DESC')
-            ->take(3)
-            ->get();
-        return response()->json([
-            'status' => 200,
-            'data'   => $blogs
-        ], 200);
-    }
-
-
-    // featured blogs
-    public function featured()
-    {
-        return response()->json([
-            'status'  => 200,
-            'data' => Blog::with('category')
-                ->withCount('comments')
-                ->where('isFeatured', 1)
-                ->orderBy('id', 'DESC')
-                ->take(4)
-                ->get(),
         ], 200);
     }
 }

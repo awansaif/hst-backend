@@ -8,18 +8,14 @@ use App\Http\Controllers\Api\V1\SiteController;
 use App\Models\Subscriber;
 use App\Models\About;
 use App\Models\Member;
-use App\Models\Blog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
 
 
 Route::get('categories', [CategoryController::class, 'index']);
 Route::get('category/{slug}', [CategoryController::class, 'show']);
+Route::get('latest', [BlogController::class, 'latest']);
 Route::get('blogs', [BlogController::class, 'index']);
 Route::get('all', [BlogController::class, 'all']);
 Route::get('blogs/{slug}', [BlogController::class, 'show']);
@@ -27,7 +23,6 @@ Route::get('blog-comment/{slug}', [BlogController::class, 'comment']);
 Route::post('blog-comment/{slug}', [BlogController::class, 'save_comment']);
 Route::get('trending', [BlogController::class, 'trending']);
 Route::get('recommended', [BlogController::class, 'recommended']);
-Route::get('latest', [BlogController::class, 'latest']);
 Route::post('contact-us', [ContactUsController::class, 'store']);
 
 Route::get('site-profile', [SiteController::class, 'profile']);
