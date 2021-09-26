@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\ContactUsController;
 use App\Http\Controllers\Api\V1\EditorController;
 use App\Http\Controllers\Api\V1\SiteController;
+use App\Http\Controllers\Api\V1\TeamController;
 use App\Models\Subscriber;
 use App\Models\Member;
 use Illuminate\Http\Request;
@@ -45,12 +46,7 @@ Route::get('about-us', AboutUsController::class);
 
 Route::get('featured', [BlogController::class, 'featured']);
 
-Route::get('team', function () {
-    return response()->json([
-        'status'  => 200,
-        'data' => Member::get(),
-    ], 200);
-});
+Route::get('team', TeamController::class);
 
 
 
