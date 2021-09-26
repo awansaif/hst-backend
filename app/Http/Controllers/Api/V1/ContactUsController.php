@@ -9,19 +9,7 @@ use Illuminate\Http\Request;
 class ContactUsController extends Controller
 {
 
-    public function index()
-    {
-        //
-    }
-
-
-    public function create()
-    {
-        //
-    }
-
-
-    public function store(Request $request)
+    public function __invoke(Request $request)
     {
         $request->validate([
             'name' => 'required',
@@ -41,29 +29,5 @@ class ContactUsController extends Controller
             'status' => 200,
             'message' => 'Thanks for contacting us.',
         ], 200);
-    }
-
-
-    public function show(ContactUs $contactUs)
-    {
-        //
-    }
-
-
-    public function edit(ContactUs $contactUs)
-    {
-        //
-    }
-
-
-    public function update(Request $request, ContactUs $contactUs)
-    {
-        //
-    }
-
-
-    public function destroy(ContactUs $contactUs)
-    {
-        //
     }
 }

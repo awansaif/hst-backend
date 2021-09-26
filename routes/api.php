@@ -23,9 +23,9 @@ Route::get('blog-comment/{slug}', [BlogController::class, 'comment']);
 Route::post('blog-comment/{slug}', [BlogController::class, 'save_comment']);
 Route::get('trending', [BlogController::class, 'trending']);
 Route::get('recommended', [BlogController::class, 'recommended']);
-Route::post('contact-us', [ContactUsController::class, 'store']);
+Route::post('contact-us', ContactUsController::class);
 
-Route::get('site-profile', [SiteController::class, 'profile']);
+Route::get('site-profile', SiteController::class, 'profile');
 
 Route::post('subscribe', function (Request $request) {
     $request->validate([

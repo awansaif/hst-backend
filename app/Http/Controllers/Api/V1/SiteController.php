@@ -7,7 +7,7 @@ use App\Models\SiteProfile;
 
 class SiteController extends Controller
 {
-    public function profile()
+    public function __invoke()
     {
         return response()->json([
             'status' => 200,
