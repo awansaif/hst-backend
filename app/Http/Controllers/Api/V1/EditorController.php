@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\Editor;
-use Illuminate\Http\Request;
 
 class EditorController extends Controller
 {
@@ -14,9 +13,8 @@ class EditorController extends Controller
     {
         return response()->json([
             'status' => 200,
-            'data'  => Editor::with(['profile' => function ($q) {
-                $q->select('editor_id', 'avatar_path');
-            }])
+            'data'  => Editor::query()
+                ->with(['profile' => fn ($builder) => $builder->select('editor_id', 'avatar_path')])
                 ->select('id', 'name', 'status')
                 ->orderBy('name', 'ASC')
                 ->where('status', 1)
@@ -29,7 +27,9 @@ class EditorController extends Controller
     {
         return response()->json([
             'status' => 200,
-            'data'  => Blog::where('editor_id', $slug)
+            'data'  => Blog::query()
+                ->select('id', 'title', 'slug', 'featured_image', 'views', 'created_at', 'editor_id')
+                ->where('editor_id', $slug)
                 ->withCount('comments')
                 ->orderBy('id', 'DESC')
                 ->get()
