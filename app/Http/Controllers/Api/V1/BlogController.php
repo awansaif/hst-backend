@@ -82,7 +82,8 @@ class BlogController extends Controller
     // fetch all blogs
     public function all()
     {
-        $blogs = Blog::with('category')
+        $blogs = Blog::query()
+            ->select('id', 'title', 'slug', 'featured_image', 'views', 'created_at')
             ->withCount('comments')
             ->orderBy('id', 'DESC')
             ->get();
