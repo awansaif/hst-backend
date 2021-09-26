@@ -37,7 +37,7 @@ class CategoryController extends Controller
 
         $blogs = Blog::query()
             ->where('category_id', $categoryId)
-            ->select('id', 'title', 'slug', 'featured_image', 'categpry_id', 'views', 'created_at')
+            ->select('id', 'title', 'slug', 'featured_image', 'category_id', 'views', 'created_at')
             ->withCount('comments')
             ->get();
 
