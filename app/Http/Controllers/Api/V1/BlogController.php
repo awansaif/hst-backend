@@ -180,8 +180,9 @@ class BlogController extends Controller
     // show trending blogs
     public function trending()
     {
-        $blogs = Blog::orderBy('views', 'DESC')
-            ->whereDate('created_at', today())
+        $blogs = Blog::query()
+            ->orderBy('views', 'DESC')
+            ->when('created_at' == today(), fn ($builder) => $builder->where('created_at', today()))
             ->select("id", 'slug', 'title', 'featured_image', 'created_at')
             ->take(5)
             ->get();
