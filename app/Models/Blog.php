@@ -36,7 +36,7 @@ class Blog extends Model
     }
     public function editor()
     {
-        return $this->hasOne(Editor::class, 'id', 'editor_id');
+        return $this->belongsTo(Editor::class, 'editor_id', 'id');
     }
 
     public function comments()
