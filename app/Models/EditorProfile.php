@@ -19,6 +19,6 @@ class EditorProfile extends Model
 
     public function editor()
     {
-        return $this->belongsTo(Editor::class);
+        return $this->belongsTo(Editor::class, 'editor_id', 'id');
     }
 }
