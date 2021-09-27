@@ -32,7 +32,7 @@ class Blog extends Model
     }
     public function profile()
     {
-        return $this->belongsTo(EditorProfile::class, 'editor_id');
+        return $this->belongsTo(EditorProfile::class, 'editor_id', 'editor_id');
     }
     public function editor()
     {

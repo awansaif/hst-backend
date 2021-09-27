@@ -99,7 +99,7 @@ class BlogController extends Controller
         $blog = Blog::query()
             ->with(['category' => fn ($builder) => $builder->select('id', 'title', 'slug')])
             ->with(['editor' => fn ($builder) => $builder->select('id', 'name')])
-            ->with(['profile' => fn ($builder) => $builder->select('id', 'avatar_path', 'about_me', 'website_link')])
+            ->with(['editor.profile' => fn ($builder) => $builder->select('id', 'avatar_path', 'about_me', 'website_link', 'editor_id')])
             ->withCount('comments')
             ->where('slug', $slug)
             ->first();
