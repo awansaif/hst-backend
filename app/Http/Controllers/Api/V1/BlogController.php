@@ -67,8 +67,8 @@ class BlogController extends Controller
         $blogs = Blog::query()
             ->with(['category' => fn ($builder) => $builder->select('id', 'title', 'slug')])
             ->withCount('comments')
-            ->select('id', 'title', 'slug', 'featured_image', 'views', 'created_at', 'category_id')
             ->orderBy('views', 'DESC')
+            ->select('id', 'title', 'slug', 'featured_image', 'views', 'created_at', 'category_id')
             ->take(6)
             ->get();
 
