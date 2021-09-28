@@ -65,10 +65,10 @@ class BlogController extends Controller
     public function recommended()
     {
         $blogs = Blog::query()
-            ->with(['category' => fn ($builder) => $builder->select('id', 'title', 'slug')])
-            ->withCount('comments')
-            ->orderBy('views', 'DESC')
             ->select('id', 'title', 'slug', 'featured_image', 'views', 'created_at', 'category_id')
+            ->withCount('comments')
+            ->with(['category' => fn ($builder) => $builder->select('id', 'title', 'slug')])
+            ->orderBy('views', 'DESC')
             ->take(6)
             ->get();
 
