@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Login Page | Admin</title>
+    <title>Login Page | Editor</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
@@ -17,34 +17,35 @@
 </head>
 
 <body>
-    <div class="account-pages my-5 pt-5">
+    <div class="account-pages my-5">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-8 col-lg-6">
                     <div class="card">
                         <div class="card-body">
                             <div class="text-center mb-4 mt-3">
-                                <a href="index.html">
+                                <a href="{{ Route('editor.login')  }}">
                                     <span>
-                                        <img src="{{ asset("assets/images/logo-dark.png") }}" alt="" height="30">
+                                        <img src="{{ asset("assets/images/editor.svg") }}" alt="" height="160">
+                                        <h2>Welcome! Editor</h2>
                                     </span>
                                 </a>
-
                             </div>
                             <form action="{{ Route('editor.login') }}" method="POST">
                                 @csrf
                                 @if(Session::has('message'))
-                                <div class="alert alert-danger">
-                                    <span class="font-weight-bold">
-                                        {{ Session::get('message') }}
-                                    </span>
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <strong>Oops!</strong> {{ Session::get('message') }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
                                 </div>
                                 @endif
 
                                 <div class="form-group">
                                     <label for="emailaddress">Email address</label>
                                     <input class="form-control" type="email" id="emailaddress" required=""
-                                        placeholder="john@deo.com" name="email" value={{ old('email') }}>
+                                        placeholder="Email" name="email" value={{ old('email') }}>
                                     @error('email')
                                     <p class="text-danger">{{ $message }}</p>
                                     @enderror
@@ -52,19 +53,11 @@
                                 <div class="form-group">
                                     <label for="password">Password</label>
                                     <input class="form-control" type="password" required="" id="password"
-                                        placeholder="Enter your password" name="password">
+                                        placeholder="******" name="password">
                                     @error('password')
                                     <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
-
-                                {{-- <div class="form-group mb-4 pb-3">
-                                    <div class="custom-control custom-checkbox checkbox-primary">
-                                        <input type="checkbox" class="custom-control-input" name="remember"
-                                            id="checkbox-signin">
-                                        <label class="custom-control-label" for="checkbox-signin">Remember me</label>
-                                    </div>
-                                </div> --}}
                                 <div class="mb-3 text-center">
                                     <button class="btn btn-primary btn-block" type="submit"> Sign In </button>
                                 </div>

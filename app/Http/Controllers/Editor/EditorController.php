@@ -4,10 +4,6 @@ namespace App\Http\Controllers\Editor;
 
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
-use App\Models\BlogComment;
-use App\Models\Editor;
-use App\Models\EditorProfile;
-use Illuminate\Http\Request;
 
 class EditorController extends Controller
 {
@@ -29,7 +25,7 @@ class EditorController extends Controller
             return redirect()->route('editor.dashboard');
         } else {
             return back()
-                ->with('message', 'Incorrect Password')
+                ->with('message', 'Incorrect password, Please try again.')
                 ->withInput(['email' => request()->email]);
         }
     }
@@ -39,6 +35,7 @@ class EditorController extends Controller
     {
         $blogs = Blog::withCount('comments')
             ->where('editor_id', auth()->guard('editor')->user()->id)
+            ->select('id', 'created_at', 'views')
             ->get();
         if (auth()->guard('editor')->user()->profile) {
             return view('editor.dashboard', [
@@ -58,31 +55,6 @@ class EditorController extends Controller
         return view('editor.pages.profile.index');
     }
 
-    public function updateProfile()
-    {
-        request()->validate([
-            'profile' => 'nullable|image',
-            'name' => 'required',
-            'website_link' => 'required|url',
-            'about_me' => 'required|max:255'
-        ]);
-        $editor = Editor::findorfail(auth()->guard('editor')->user()->id);
-
-        $editor->update([
-            'name' => request()->name
-        ]);
-        EditorProfile::updateorCreate([
-            'editor_id' => auth()->guard('editor')->user()->id
-        ], [
-            'editor_id' => auth()->guard('editor')->user()->id,
-            'avatar_path'  => auth()->guard('editor')->user()->profile && request()->profile ? request()->profile->store('profiles', 'public') : '',
-            'website_link' => request()->website_link,
-            'about_me'  => request()->about_me
-        ]);
-
-        return back()
-            ->with('message', 'Profile Updated successfully');
-    }
 
     public function setting()
     {

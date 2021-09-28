@@ -1,12 +1,14 @@
 <?php
 
-use App\Http\Controllers\Admin\AboutController;
-use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\BlogCategoryController;
-use App\Http\Controllers\Admin\BlogController;
-use App\Http\Controllers\Admin\EditorController;
-use App\Http\Controllers\Admin\MemberController;
-use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\{
+    AboutController,
+    AdminController,
+    BlogCategoryController,
+    BlogController,
+    EditorController,
+    MemberController,
+    SettingController
+};
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\Editor\BlogController as EditorBlogController;
 use App\Http\Controllers\Editor\EditorController as EditorEditorController;
@@ -15,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('editor.login');
 });
 
 Route::prefix('editor')

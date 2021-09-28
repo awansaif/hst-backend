@@ -44,7 +44,7 @@
 
     <!-- LOGO -->
     <div class="logo-box">
-        <a href="index.html" class="logo text-center logo-dark">
+        <a href="{{ Route('editor.dashboard') }}" class="logo text-center logo-dark">
             <span class="logo-lg">
                 <img src="{{ asset("assets/images/logo-dark.png") }}" alt="" height="26">
                 <!-- <span class="logo-lg-text-dark">Simple</span> -->
@@ -55,7 +55,7 @@
             </span>
         </a>
 
-        <a href="index.html" class="logo text-center logo-light">
+        <a href="{{ Route('editor.dashboard') }}" class="logo text-center logo-light">
             <span class="logo-lg">
                 <img src="{{ asset("assets/images/logo-light.png") }}" alt="" height="26">
                 <!-- <span class="logo-lg-text-light">Simple</span> -->

@@ -24,7 +24,6 @@
 </head>
 
 <body>
-
     <!-- Begin page -->
     <div id="wrapper">
         @include('editor.partials.navbar')
@@ -37,7 +36,7 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-12">
-                                2017 - 2020 &copy; Simple theme by <a href="">Coderthemes</a>
+                                2017 - 2020 &copy; <a href="">HST Blog</a>
                             </div>
                         </div>
                     </div>
@@ -51,10 +50,6 @@
     <!-- Vendor js -->
     <script src="{{ asset("assets/js/vendor.min.js") }}"></script>
 
-    <script src="{{ asset("assets/libs/morris-js/morris.min.js") }}"></script>
-    <script src="{{ asset("assets/libs/raphael/raphael.min.js") }}"></script>
-
-    <script src="{{ asset("assets/js/pages/dashboard.init.js") }}"></script>
 
     <!-- Required datatable js -->
     <script src="{{ asset("assets/libs/datatables/jquery.dataTables.min.js") }}"></script>
