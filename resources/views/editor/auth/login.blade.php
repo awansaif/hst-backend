@@ -26,7 +26,7 @@
                             <div class="text-center mb-4 mt-3">
                                 <a href="{{ Route('editor.login')  }}">
                                     <span>
-                                        <img src="{{ asset("assets/images/editor.svg") }}" alt="" height="160">
+                                        <img src="{{ asset("assets/images/Editor.svg") }}" alt="" height="160">
                                         <h2>Welcome! Editor</h2>
                                     </span>
                                 </a>
