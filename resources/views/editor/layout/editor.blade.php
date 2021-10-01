@@ -64,15 +64,9 @@
     <!-- App js -->
     <script src="{{ asset("assets/js/app.min.js") }}"></script>
     {{-- ckeditor --}}
-    <script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script>
-
+    <script src="https://cdn.ckeditor.com/4.16.2/full-all/ckeditor.js"></script>
     <script>
-        ClassicEditor
-            .create( document.querySelector( '#editor' ))
-
-            .catch( error => {
-                console.error( error );
-            } );
+        CKEDITOR.replace( 'body' );
     </script>
     @livewireScripts()
 </body>
