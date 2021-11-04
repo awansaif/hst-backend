@@ -14,4 +14,10 @@ class Category extends Model
         'title',
         'slug'
     ];
+
+
+    public function blogs()
+    {
+        return $this->hasMany(Blog::class)->take(3);
+    }
 }

@@ -8,6 +8,11 @@ use App\Http\Controllers\Api\V1\EditorController;
 use App\Http\Controllers\Api\V1\NewsListerController;
 use App\Http\Controllers\Api\V1\SiteController;
 use App\Http\Controllers\Api\V1\TeamController;
+
+use App\Http\Controllers\Api\v2\{
+    HomeController,
+};
+
 use Illuminate\Support\Facades\Route;
 
 
@@ -40,3 +45,7 @@ Route::get('team', TeamController::class);
 Route::get('editors', [EditorController::class, 'editors']);
 // show signle editor blogs
 Route::get('editor/{slug}', [EditorController::class, 'blogs']);
+
+
+// apis for secondary pages
+Route::get('home', HomeController::class);

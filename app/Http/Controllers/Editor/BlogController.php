@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Editor;
 
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
-use App\Models\BlogView;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -28,7 +27,7 @@ class BlogController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $blog = $request->validate([
             'title' => 'required|unique:blogs,title',
             'featured_image' => 'required|image',
             'category' => 'required|exists:categories,id',
@@ -75,10 +74,15 @@ class BlogController extends Controller
         $blog->update([
             'title' => $request->title,
             'slug' => Str::slug($request->title, '-'),
-            'featured_image' => $request->featured_image ? $request->featured_image->store('images', 'public') : $blog->featured_image,
             'category_id' => $request->category,
             'body' => $request->body,
         ]);
+
+        if (request('featured_image')) {
+            $blog->update([
+                'featured_image' =>  request('featured_image')->store('images', 'public'),
+            ]);
+        }
 
         return back()
             ->with('message', 'Blog updated successfully');
