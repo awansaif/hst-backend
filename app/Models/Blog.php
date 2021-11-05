@@ -44,8 +44,4 @@ class Blog extends Model
         return $this->hasMany(BlogComment::class);
     }
 
-
-    protected $casts = [
-        'created_at' => "datetime:M d, Y",
-    ];
 }
