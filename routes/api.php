@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\V1\SiteController;
 use App\Http\Controllers\Api\V1\TeamController;
 
 use App\Http\Controllers\Api\v2\{
+    CategoryController as V2CategoryController,
     HomeController,
 };
 
@@ -49,3 +50,4 @@ Route::get('editor/{slug}', [EditorController::class, 'blogs']);
 
 // apis for secondary pages
 Route::get('home', HomeController::class);
+Route::get('v2/categories/{slug}', V2CategoryController::class);
