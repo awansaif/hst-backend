@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Facades\Cache;
 
 class Blog extends Model
 {
@@ -44,4 +45,13 @@ class Blog extends Model
         return $this->hasMany(BlogComment::class);
     }
 
+
+    // Forget cache key on storing or updating
+    public static function boot()
+    {
+        Parent::boot();
+        static::saved(function () {
+            Cache::forget('categories');
+        });
+    }
 }

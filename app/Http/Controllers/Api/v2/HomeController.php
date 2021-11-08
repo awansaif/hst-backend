@@ -16,7 +16,7 @@ class HomeController extends Controller
         } else {
             $categories = Cache::remember('categories', 86400, function () {
                 return Category::query()
-                    ->with('blogs:category_id,title,featured_image,slug,editor_id,created_at', 'blogs.editor:id,name')
+                    ->with('blogs', 'blogs.editor:id,name')
                     ->select('id', 'title', 'slug')
                     ->get();
             });

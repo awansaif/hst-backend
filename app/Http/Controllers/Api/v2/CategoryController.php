@@ -29,7 +29,11 @@ class CategoryController extends Controller
             });
         }
         return response()->json([
-            'data' => $category
+            'data' => Category::query()
+                ->with('blogs:category_id,title,slug,featured_image,created_at,editor_id', 'blogs.editor:id,name')
+                ->where('slug', $request->slug)
+                ->select('id', 'title', 'slug')
+                ->get()
         ]);
     }
 }
