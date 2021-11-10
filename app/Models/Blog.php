@@ -2,17 +2,16 @@
 
 namespace App\Models;
 
-use App\Http\Livewire\SiteProfile\EditProfile;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\Cache;
+use app\traits\CacheClear;
 
 class Blog extends Model
 {
-    use HasFactory;
+    use HasFactory, CacheClear;
 
     protected $fillable = [
         'editor_id',
