@@ -18,12 +18,15 @@ class HomeController extends Controller
                 return Category::query()
                     ->with('blogs', 'blogs.editor:id,name')
                     ->select('id', 'title', 'slug')
-                    ->get();
+                    ->get()->map(function ($query) {
+                        $query->setRelation('blogs', $query->blogs->take(4));
+                        return $query;
+                    });
             });
         }
 
         return response()->json([
-            'data' =>   $categories
+            'data' => $categories
         ]);
     }
 }
