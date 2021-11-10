@@ -16,11 +16,20 @@ class BlogController extends Controller
      */
     public function __invoke(Request $request)
     {
+        $blog = Blog::query()
+            ->with('editor:id,name')
+            ->where('slug', $request->slug)
+            ->firstOrFail();
+        $related = Blog::query()
+            ->select('title', 'slug', 'featured_image', 'editor_id', 'created_at')
+            ->with('editor:id,name')
+            ->where('category_id', $blog->category_id)
+            ->where('id', '!=', $blog->id)
+            ->take(4)
+            ->get();
         return response()->json([
-            'blog' => Blog::query()
-                ->with('editor:id,name')
-                ->where('slug', $request->slug)
-                ->firstOrFail()
+            'blog' => $blog,
+            'related' => $related
         ]);
     }
 }
