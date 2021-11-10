@@ -20,6 +20,7 @@ class BlogController extends Controller
             ->with('editor:id,name')
             ->where('slug', $request->slug)
             ->firstOrFail();
+        $blog->increment('views');
         $related = Blog::query()
             ->select('title', 'slug', 'featured_image', 'editor_id', 'created_at')
             ->with('editor:id,name')
