@@ -12,9 +12,11 @@ trait CacheClear
         static::updated(function () {
             Artisan::call('cache:clear');
         });
+        parent::boot();
         static::created(function () {
             Artisan::call('cache:clear');
         });
+        parent::boot();
         static::saved(function () {
             Artisan::call('cache:clear');
         });
