@@ -17,7 +17,7 @@ class BlogController extends Controller
     public function __invoke(Request $request)
     {
         $blog = Blog::query()
-            ->with('editor:id,name')
+            ->with('editor:id,name', 'editor.profile:id,editor_id,avatar_path')
             ->where('slug', $request->slug)
             ->firstOrFail();
         $blog->increment('views');
