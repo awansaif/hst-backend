@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\v2\{
     CategoryController as V2CategoryController,
     BlogController as V2BlogController,
     HomeController,
+    SearchController,
 };
 
 use Illuminate\Support\Facades\Route;
@@ -53,3 +54,5 @@ Route::get('editor/{slug}', [EditorController::class, 'blogs']);
 Route::get('home', HomeController::class);
 Route::get('v2/categories/{slug}', V2CategoryController::class);
 Route::get('v2/blogs/{slug}', V2BlogController::class);
+// search api
+Route::get('search', SearchController::class);
