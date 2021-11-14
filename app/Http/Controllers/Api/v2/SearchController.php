@@ -23,7 +23,8 @@ class SearchController extends Controller
         } else {
             $blogs = Blog::where('title', 'like', '%' . $request->q . '%')
                 ->orWhere('body', 'like', '%' . $request->q . '%')
-                ->select('title', 'featured_image', 'slug', 'editor_id', 'created_at', 'id', 'editor:id,names')
+                ->select('title', 'featured_image', 'slug', 'editor_id', 'created_at', 'id')
+                ->with('editor:id,name')
                 ->orderBy('id', 'DESC')
                 ->paginate(10);
             Cache::put('search_blog_' . $request->q, $blogs, 120);
